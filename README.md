@@ -22,7 +22,7 @@ No unsupported product/medical claims, fictitious reviews, fictional bank accoun
 ## Order flow
 The **Send order on WhatsApp** button creates a prefilled message to the contact team. It does not store customer contact information on a backend, charge a card or mark the order paid.
 
-Main WhatsApp contact: **0308-9486740**. Support: **0307-4970790**.
+Main WhatsApp orders, reseller inquiries and customer support: **+92 337 3764975** (WhatsApp: https://wa.me/923373764975).
 
 ## Publishing on GitHub Pages
 1. In this repository, open **Settings → Pages**.
