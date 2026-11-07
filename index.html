@@ -208,11 +208,11 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
 var PRIMARY="923089486740";
 var products=[
  {id:"duo",name:"Herbal Shampoo + Hair Oil Set",category:"hair",size:"500 ml + 250 ml",price:2520,old:3000,badge:"★ Best Seller",kind:"duo",description:"Flora signature hair-care duo: 500 ml herbal shampoo and 250 ml herbal hair oil with an elegant white-and-gold oil sticker."},
- {id:"weight",name:"Flora Weight Loss Powder",category:"wellness",size:"500 g",price:null,badge:"Wellness",kind:"pouch",description:"Flora herbal wellness powder. Ask our team for composition, suitability, current price and safe directions. Results are not guaranteed."},
- {id:"zafrani",name:"Zafrani Brightening Cream",category:"skin",size:"Ask for size",price:null,badge:"Beauty Care",kind:"cream",description:"Explore Flora's Zafrani beauty-care range. Confirm ingredients, packaging and price before ordering."},
- {id:"facial",name:"24K Golden Facial Kit",category:"skin",size:"6-piece kit",price:3500,badge:"6 in 1 Care",kind:"kit",description:"Six-product facial kit: Mask Peel Off, Scrub, Massage Gel, Triple Action Cleanser, Polisher and Cream."},
- {id:"mulathi",name:"Flora Mulathi Serum",category:"skin",size:"Ask for size",price:null,badge:"Serum Care",kind:"serum",description:"Flora Mulathi beauty serum. Contact our team for current pack size, ingredients and price."},
- {id:"protein",name:"Flora Protein Powder",category:"wellness",size:"Ask for pack size",price:null,badge:"Nutrition",kind:"pouch",description:"Dry-fruit and herbal protein powder range. Confirm the current formulation, allergen details and price before purchasing."},
+ {id:"weight",name:"Flora Weight Loss Powder",category:"wellness",size:"500 g",price:1800,old:2500,badge:"Wellness",kind:"pouch",description:"Flora herbal wellness powder. Ask our team for composition, suitability, current price and safe directions. Results are not guaranteed."},
+ {id:"zafrani",name:"Zafrani Brightening Cream",category:"skin",size:"Ask for size",price:1500,old:2300,badge:"Beauty Care",kind:"cream",description:"Explore Flora's Zafrani beauty-care range. Confirm ingredients, packaging and price before ordering."},
+ {id:"facial",name:"24K Golden Facial Kit",category:"skin",size:"6-piece kit",price:3500,old:5000,badge:"6 in 1 Care",kind:"kit",description:"Six-product facial kit: Mask Peel Off, Scrub, Massage Gel, Triple Action Cleanser, Polisher and Cream."},
+ {id:"mulathi",name:"Flora Mulathi Serum",category:"skin",size:"Ask for size",price:800,old:1500,badge:"Serum Care",kind:"serum",description:"Flora Mulathi beauty serum. Contact our team for current pack size, ingredients and price."},
+ {id:"protein",name:"Flora Protein Powder",category:"wellness",size:"Ask for pack size",price:2500,old:4500,badge:"Nutrition",kind:"pouch",description:"Dry-fruit and herbal protein powder range. Confirm the current formulation, allergen details and price before purchasing."},
 ];
 var state={filter:"all",q:"",cart:{}};
 try{var saved=JSON.parse(localStorage.getItem("flora_cart_v1")||"{}");if(saved&&typeof saved==="object") Object.keys(saved).forEach(function(k){if(products.some(function(p){return p.id===k&&p.price!==null})&&Number.isInteger(saved[k])&&saved[k]>0&&saved[k]<=99)state.cart[k]=saved[k];});}catch(e){}
@@ -246,8 +246,9 @@ function card(p){
  var cat=document.createElement("div");cat.className="product-category";cat.textContent=(p.category==="hair"?"Hair Care":p.category==="skin"?"Skin Care":"Wellness")+" · "+p.size;
  var title=document.createElement("h3");title.textContent=p.name;
  var desc=document.createElement("p");desc.textContent=p.description;
- var price=document.createElement("div");price.className="price-row";var amount=document.createElement("strong");amount.className="price";amount.textContent=p.price===null?"Price on request":money(p.price);price.appendChild(amount);
+ var price=document.createElement("div");price.className="price-row";
  if(p.old){var old=document.createElement("span");old.className="old-price";old.textContent=money(p.old);price.appendChild(old)}
+ var amount=document.createElement("strong");amount.className="price";amount.textContent=p.price===null?"Price on request":money(p.price);price.appendChild(amount);
  var button=document.createElement("button");button.className="card-button"+(p.price===null?" secondary":"");button.textContent=p.price===null?"Ask for price ↗":"Add to bag +";button.addEventListener("click",function(){if(p.price===null){window.open(wa("Assalamualaikum! I want to ask about "+p.name+" ("+p.size+"). Please share current price, ingredients and availability."),"_blank","noopener,noreferrer")}else add(p.id)});
  info.append(cat,title,desc,price,button);c.append(img,info);return c;
 }
