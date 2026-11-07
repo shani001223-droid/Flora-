@@ -112,6 +112,27 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
  .product-visual .approved-product-photo{width:100%;height:100%;object-fit:contain}
 }
 @media(max-width:360px){.product-visual{height:240px!important}}
+
+/* Flora collection: premium brand-story card, responsive vector decoration */
+.about{background:linear-gradient(180deg,#fff2e1,#fff9f0)}
+.about-grid{gap:clamp(24px,4.5vw,70px)}
+.about-art{isolation:isolate;position:relative;min-height:485px;display:flex;align-items:center;justify-content:flex-start;text-align:left;padding:50px 45px;color:#ffebc2;border:2px solid #dfab53;border-radius:33px;background:radial-gradient(ellipse at 95% 84%,#ca894b 0%,transparent 54%),radial-gradient(ellipse at 0 0,#4d260b,transparent 68%),linear-gradient(135deg,#381c0b 3%,#724015 57%,#a96727 100%);box-shadow:inset 0 0 1px 2px #ffdf8540,0 16px 38px #67360e24;overflow:hidden}
+.about-art:before{content:"";position:absolute;bottom:-105px;left:-25%;right:-35%;height:245px;border-radius:50%;transform:rotate(-8deg);border-top:3px solid #f7c86e;box-shadow:inset 0 22px 45px #ffcd6c33,0 -2px 24px #ffdc7845;z-index:0}
+.about-art:after{content:"❦";position:absolute;z-index:0;right:-26px;top:38%;bottom:auto;font:260px/1 Georgia,serif;color:#f7c97732;transform:rotate(-19deg);pointer-events:none}
+.about-art-inner{z-index:2;position:relative;width:100%}
+.about-art-brandline{font:500 12px/1.5 "DM Sans",Arial,sans-serif;letter-spacing:.28em;color:#f8dcac}
+.about-art-ornament{display:flex;align-items:center;gap:12px;width:230px;max-width:70%;margin:18px 0 26px;color:#ffd47a}
+.about-art-ornament i{height:1px;background:#e7b653;flex:1}
+.about-art-ornament span{font:28px/1 Georgia,serif}
+.about-art strong{display:block;max-width:none;font:500 clamp(37px,4.2vw,59px)/1.1 "Playfair Display",Georgia,serif;letter-spacing:-.03em;color:#ffedc8;text-shadow:0 1px 8px #28150a66}
+.about-art-caption{margin-top:29px;font:500 12px/1.5 "DM Sans",Arial,sans-serif;letter-spacing:.27em;color:#ffe0a3}
+.about-art-botanical{position:absolute;width:148px;height:148px;color:#f5ca7a;pointer-events:none;z-index:1;opacity:.78}
+.art-leaf-top{top:-14px;right:-5px;transform:rotate(8deg)}
+.art-leaf-bottom{bottom:-33px;left:-29px;transform:rotate(188deg);opacity:.6}
+@media(max-width:930px){.about-art{padding:35px 30px;min-height:450px}.about-art strong{font-size:clamp(35px,5vw,48px)}}
+@media(max-width:680px){.about-art{min-height:425px;padding:32px 27px;border-radius:29px}.about-art strong{font-size:clamp(37px,10vw,49px)}.about-art-brandline{font-size:10px}.about-art-ornament{margin:14px 0 24px}.about-art-caption{font-size:11px;letter-spacing:.22em;margin-top:25px}.about-art-botanical{width:112px;height:112px}.about-art:after{font-size:210px;right:-32px}}
+@media(max-width:360px){.about-art{min-height:390px;padding:26px 21px}.about-art strong{font-size:36px}}
+
 </style>
 </head>
 <body>
@@ -140,7 +161,16 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
  <p class="disclaimer" style="margin-top:20px">Product images are AI-rendered visual mockups, not verified product photographs. Actual labels and packaging may differ. Confirm ingredients, sizes, availability, suitability and final prices with Flora before ordering.</p>
 </div></section>
 <section class="section about" id="about"><div class="container about-grid">
- <div class="about-art"><span>Flora By M/S & CO.</span><strong>Everyday rituals, beautiful moments.</strong><span>Hair & Beauty Care</span></div>
+ <div class="about-art" aria-label="Flora: Everyday rituals, beautiful moments">
+  <svg class="about-art-botanical art-leaf-top" aria-hidden="true" viewBox="0 0 160 160" fill="none"><path d="M18 145Q72 65 150 10M73 84Q39 63 51 26Q87 36 73 84ZM112 46Q105 15 143 5Q155 37 112 46ZM48 116Q9 101 17 65Q57 76 48 116Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M51 26L73 84M143 5L112 46M17 65L48 116" stroke="currentColor" opacity=".45"/></svg>
+  <div class="about-art-inner">
+    <div class="about-art-brandline">FLORA BY M/S &amp; CO.</div>
+    <div class="about-art-ornament" aria-hidden="true"><i></i><span>❧</span><i></i></div>
+    <strong>Everyday<br>rituals,<br>beautiful<br>moments.</strong>
+    <div class="about-art-caption">HAIR &amp; BEAUTY CARE</div>
+  </div>
+  <svg class="about-art-botanical art-leaf-bottom" aria-hidden="true" viewBox="0 0 160 160" fill="none"><path d="M18 145Q72 65 150 10M73 84Q39 63 51 26Q87 36 73 84ZM112 46Q105 15 143 5Q155 37 112 46ZM48 116Q9 101 17 65Q57 76 48 116Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+</div>
  <div class="about-copy"><span class="tag">About our brand</span><h2>Rooted in a love for everyday self-care.</h2><p>Flora By M/S & CO. brings together a collection of herbal hair-care and beauty products designed around simple personal-care routines. From our shampoo and hair oil set to our Golden Facial Kit, we focus on making the shopping experience clear, convenient and personal.</p><div class="points"><div class="point"><span class="point-icon">✦</span><span><b>Hair-care essentials</b><br>Herbal Shampoo 500 ml and Herbal Hair Oil 250 ml.</span></div><div class="point"><span class="point-icon">✦</span><span><b>Beauty collection</b><br>Six-step Golden Facial Kit and more.</span></div><div class="point"><span class="point-icon">✦</span><span><b>Real assistance</b><br>Chat with our team to confirm orders, ingredients and delivery.</span></div></div></div>
 </div></section>
 <section class="section reseller" id="reseller"><div class="container reseller-inner"><div><span class="tag">Partner with Flora</span><h2>Grow with our reseller program.</h2><p>Interested in wholesale or reselling Flora products? Our reseller process starts with a minimum of five hair-care sets. Contact the team for wholesale pricing and approval.</p><a class="btn" id="resellerLink" target="_blank" rel="noopener noreferrer" href="#">Request reseller details ↗</a></div><div class="reseller-note"><b>Wholesale order guidelines</b><p>Minimum: 5 sets. Advance bank transfer only, with payment confirmation by our team before processing. Wholesale rates, account details, stock and shipping are shared after inquiry.</p></div></div></section>
@@ -183,9 +213,6 @@ var products=[
  {id:"facial",name:"24K Golden Facial Kit",category:"skin",size:"6-piece kit",price:3500,badge:"6 in 1 Care",kind:"kit",description:"Six-product facial kit: Mask Peel Off, Scrub, Massage Gel, Triple Action Cleanser, Polisher and Cream."},
  {id:"mulathi",name:"Flora Mulathi Serum",category:"skin",size:"Ask for size",price:null,badge:"Serum Care",kind:"serum",description:"Flora Mulathi beauty serum. Contact our team for current pack size, ingredients and price."},
  {id:"protein",name:"Flora Protein Powder",category:"wellness",size:"Ask for pack size",price:null,badge:"Nutrition",kind:"pouch",description:"Dry-fruit and herbal protein powder range. Confirm the current formulation, allergen details and price before purchasing."},
- {id:"shampoo",name:"Flora Herbal Shampoo",category:"hair",size:"500 ml",price:null,badge:"Hair Care",kind:"shampoo",description:"Flora herbal shampoo. Ask our team about the current single-bottle price and ingredients."},
- {id:"oil",name:"Flora Herbal Hair Oil",category:"hair",size:"250 ml",price:null,badge:"White & Gold Label",kind:"oil",description:"Flora herbal hair oil in the signature dark bottle with white-and-gold sticker. Confirm ingredients and individual price with our team."},
- {id:"phakki",name:"Flora Herbal Phakki",category:"wellness",size:"Ask for details",price:null,badge:"Herbal",kind:"pouch",description:"Flora herbal wellness collection. Request ingredients, safe directions and pricing before use."}
 ];
 var state={filter:"all",q:"",cart:{}};
 try{var saved=JSON.parse(localStorage.getItem("flora_cart_v1")||"{}");if(saved&&typeof saved==="object") Object.keys(saved).forEach(function(k){if(products.some(function(p){return p.id===k&&p.price!==null})&&Number.isInteger(saved[k])&&saved[k]>0&&saved[k]<=99)state.cart[k]=saved[k];});}catch(e){}
