@@ -1,0 +1,52 @@
+name: Prepare approved Flora website photos
+on:
+  push:
+    paths:
+      - .github/workflows/prepare-flora-photo.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - run: python -m pip install --quiet pillow
+      - name: Decode and crop approved Flora artwork
+        run: |
+          python - <<'PY'
+          import base64, io, os
+          from PIL import Image, ImageEnhance, ImageFilter
+          with open('assets/flora-photo-source.b64') as f:
+              data=base64.b64decode(f.read().strip(),validate=True)
+          src=Image.open(io.BytesIO(data)).convert("RGB")
+          src.load()
+          print("Approved Flora reference source:",src.size)
+          assert src.size[0] >= 440 and src.size[1] >= 160, "Reference photo invalid"
+          os.makedirs('assets/products',exist_ok=True)
+          w,h=src.size
+          split=int(round(h*228/328))
+          hero=src.crop((0,0,w,split))
+          hero.save('assets/flora-collab-hero.jpg',quality=92,optimize=True)
+          names=['duo','weight','zafrani','facial','mulathi','protein']
+          for i,name in enumerate(names):
+              left=round(i*w/6)
+              right=round((i+1)*w/6)
+              crop=src.crop((left,split,right,h))
+              crop=crop.resize((max(180,crop.width*3),max(160,crop.height*3)),Image.Resampling.LANCZOS)
+              crop.save('assets/products/'+name+'.jpg',quality=90,optimize=True)
+          # This reference contains the approved 500ml shampoo and 250ml oil combo.
+          src.crop((0,split,round(w/6),h)).resize((300,180),Image.Resampling.LANCZOS).save('assets/products/shampoo.jpg',quality=90)
+          src.crop((0,split,round(w/6),h)).resize((300,180),Image.Resampling.LANCZOS).save('assets/products/oil.jpg',quality=90)
+          PY
+      - name: Commit source-derived photo crops
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/flora-collab-hero.jpg assets/products/*.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Add source-based Flora collaboration hero and product photos"
+            git push
+          fi
