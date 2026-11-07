@@ -83,6 +83,20 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
 @media(max-width:680px){.container{padding:0 16px}.announcement .trust-top{gap:7px 12px;font-size:9px}.announcement b{font-size:11px}.announcement a{padding:4px 12px}.header-inner{min-height:70px}.brand-main{font-size:35px}.nav{top:70px;background:#fff7e8}.nav a{font-size:14px}.hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:0;gap:0}.collab-portrait{display:none}.collab-copy{grid-column:1/-1;padding:29px 10px 5px}.collab-brand{font-size:clamp(28px,8vw,40px)}.collab-title{margin:11px 0;padding:7px 19px}.collab-headline{font-size:29px;margin:3px 0 14px}.collab-proof{margin:12px 0 16px;gap:3px}.collab-proof div{min-width:80px;font-size:10px;padding:0 6px}.collab-proof span{width:32px;height:32px;font-size:19px}.collab-actions{margin-bottom:9px}.hero-art{grid-column:1/-1;height:310px;width:100%;margin:0;transform:scale(.7);transform-origin:50% 100%;align-self:end;overflow:visible}.hero-product-note{bottom:24px;right:5%}.hero-ribbon{top:10px}.category-strip{grid-template-columns:repeat(4,1fr);gap:7px;padding:10px}.category-strip a{min-height:67px;font-size:10px;padding:4px}.category-strip a span{font-size:23px}.trust-grid{grid-template-columns:repeat(3,1fr);gap:4px;padding:12px 8px}.trust-item{border:0;border-right:1px solid #e0c8a6}.trust-item:last-child{grid-column:auto;border:0;padding-top:0}.trust-item b{font-size:11px}.trust-item span{font-size:9px}.section{padding:36px 0}.section-heading h2{font-size:29px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-visual{height:185px!important}.product-details{padding:12px}.product-details h3{font-size:16px}.price{font-size:15px}.card-button{font-size:11px}.combo-promos{grid-template-columns:1fr}.combo-tile{padding:14px}.combo-tile h3{font-size:20px}.combo-tile a{font-size:11px;padding:9px 12px}}
 @media(max-width:360px){.product-grid{grid-template-columns:1fr}.product-visual{height:225px!important}.hero-art{transform:scale(.62);margin-bottom:-15px}.category-strip a{font-size:9px}}
 
+
+/* Approved image assets replace CSS placeholder portrait and drawn product graphics. */
+.real-hero{position:relative;background:#fff4e4;border-bottom:2px solid #e8b956;padding:0 0 18px}
+.reference-hero-image{max-width:1450px;margin:auto;line-height:0;overflow:hidden}
+.reference-hero-image img{display:block;width:100%;height:auto;object-fit:contain;background:#fff5e8}
+.real-hero-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;max-width:1200px;margin:14px auto 0;padding:0 16px}
+.real-hero-buttons .btn{border-radius:22px;box-shadow:0 3px 9px #92621c33}
+.real-hero-buttons .btn-gold{background:linear-gradient(#ffe7a0,#eaae26);color:#35200d}
+.real-hero-buttons .btn-outline{border-color:#d9aa55;color:#593709;background:#fff7eb}
+.approved-product-photo{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:linear-gradient(#fffcf7,#fff3df);image-rendering:auto}
+.product-visual{padding:16px 8px 0}.product-visual:has(.approved-product-photo):after{display:none}
+.product-visual .small-badge{top:12px;left:12px}
+@media(max-width:680px){.real-hero{padding-bottom:10px}.real-hero-buttons{gap:8px;margin-top:9px}.real-hero-buttons .btn{font-size:10px;padding:9px 12px}.product-visual{padding:10px 2px 0}}
+
 </style>
 </head>
 <body>
@@ -93,18 +107,10 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
  <div class="header-actions"><a class="icon-btn" href="#shop" aria-label="Search products">⌕</a><button class="icon-btn menu-toggle" id="menuButton" aria-label="Toggle menu" aria-controls="navigation" aria-expanded="false">☰</button><button class="icon-btn" id="cartButton" aria-label="Open shopping cart">🛒<span class="cart-number" id="cartCount">0</span></button></div>
 </div></header>
 <main>
-<section class="hero" id="home"><div class="container hero-inner">
- <div class="collab-portrait" aria-hidden="true"><div class="portrait-leaf">❧<br>✦</div><div class="portrait-name">Anishy's Edit ♡</div></div>
- <div class="collab-copy"><div class="collab-brand">Flora <span>×</span> <em>Anishy</em></div><div class="collab-title">HERBAL CARE COLLECTION</div><h1 class="collab-headline">Natural Herbal Care<br><b>Chosen for Everyday Beauty</b> ♡</h1>
-  <div class="collab-proof"><div><span>❧</span>Herbal<br>Formulas</div><div><span>♧</span>Care<br>Essentials</div><div><span>✦</span>Shop &<br>Discover</div></div>
-  <div class="collab-actions"><a href="#shop" class="btn btn-gold">Shop the Collection →</a><a href="#collab-offer" class="btn btn-outline">Explore Combos</a></div>
- </div>
- <div class="hero-art" aria-label="Flora shampoo 500 ml and hair oil 250 ml illustration with white-and-gold oil sticker"><div class="hero-ribbon"><strong>Flora</strong><small>Signature Duo</small></div><div class="art-plinth"></div>
-  <div class="bottle shampoo"><div class="cap"></div><div class="body"><div class="label"><span class="leaf-symbol">❦</span><strong>Flora</strong><small>BY M/S & CO.</small><b>HERBAL<br>SHAMPOO</b><i>HAIR CARE</i><span class="ml">500 ml</span></div></div></div>
-  <div class="bottle oil"><div class="cap"></div><div class="body"><div class="label"><span class="leaf-symbol">❦</span><strong>Flora</strong><small>BY M/S & CO.</small><b>HERBAL<br>HAIR OIL</b><i>HAIR CARE</i><span class="ml">250 ml</span></div></div></div>
-  <div class="hero-product-note">✦ White & Gold Oil Label</div>
- </div>
-</div></section>
+<section class="real-hero" id="home" aria-label="Flora × Anishy herbal care collection">
+ <div class="reference-hero-image"><img src="assets/flora-collab-hero.jpg" width="450" height="114" alt="Flora × Anishy collaboration with approved white-labelled Flora herbal hair oil, shampoo, face care, wellness and nutrition products" fetchpriority="high" decoding="async"></div>
+ <div class="real-hero-buttons"><a href="#shop" class="btn btn-gold">Shop Flora Collection →</a><a href="#collab-offer" class="btn btn-outline">Explore Combo Offers</a></div>
+</section>
 <div class="category-strip" aria-label="Explore Flora categories">
  <a href="#shop" data-pick="hair"><span>♨</span>Hair Care</a><a href="#shop" data-pick="skin"><span>♙</span>Skin Care</a><a href="#shop" data-pick="skin"><span>▣</span>Facial Kits</a><a href="#shop" data-pick="wellness"><span>♧</span>Weight Management</a><a href="#shop" data-pick="wellness"><span>⚒</span>Protein & Nutrition</a><a href="#shop" data-pick="skin"><span>♢</span>Serum Care</a><a href="#shop" data-pick="wellness"><span>❧</span>Herbal Wellness</a><a href="#collab-offer"><span>♔</span>Combo Offers</a>
 </div>
@@ -172,6 +178,8 @@ var $=function(id){return document.getElementById(id)};
 var money=function(n){return "Rs. "+Number(n).toLocaleString("en-PK")};
 var wa=function(message){return "https://wa.me/"+PRIMARY+"?text="+encodeURIComponent(message)};
 function visual(p){
+ if(["duo","weight","zafrani","facial","mulathi","protein","shampoo","oil"].includes(p.id))return '<img class="approved-product-photo" src="assets/products/'+p.id+'.jpg" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">';
+
  var leaf='<i>❦</i><span>Flora</span><small>BY M/S & CO.</small>';
  var shampoo='<div class="mini-bottle"><div class="mini-cap"></div><div class="mini-body"><div class="mini-label">'+leaf+'<small>HERBAL SHAMPOO<br>500 ml</small></div></div></div>';
  var oil='<div class="mini-bottle oil-mini"><div class="mini-cap"></div><div class="mini-body"><div class="mini-label">'+leaf+'<small>HERBAL HAIR OIL<br>250 ml</small></div></div></div>';
