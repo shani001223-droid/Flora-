@@ -134,6 +134,27 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
 @media(max-width:360px){.about-art{min-height:390px;padding:26px 21px}.about-art strong{font-size:36px}}
 
 .announcement .support-shortcut{background:none;box-shadow:none;color:#523414;padding:0;border-radius:0;font-size:inherit;letter-spacing:inherit;font-weight:inherit}.announcement .support-shortcut:hover{text-decoration:underline}
+
+/* Flora optional coupon entry and per-code price summary */
+.cart-panel{overflow-y:auto}
+.cart-content{min-height:65px}
+.coupon-box{flex-shrink:0;padding:14px 23px 12px;border-top:1px solid var(--line);background:#fff}
+.coupon-box label{display:block;font-size:12px;font-weight:800;color:#3e2b12;margin-bottom:8px}
+.coupon-box label span{font-weight:500;color:#85735b}
+.coupon-controls{display:flex;gap:8px}
+.coupon-controls input{flex:1;min-width:0;border:1px solid #ddc499;border-radius:8px;background:#fffcf7;color:#35250f;padding:11px;font-size:13px;text-transform:uppercase}
+.coupon-controls button{border:0;border-radius:8px;background:#bd831a;color:#fff;font-weight:800;font-size:12px;padding:10px 17px}
+.coupon-controls button:hover{background:#956116}
+.coupon-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.coupon-feedback{font-size:11px;font-weight:650;line-height:1.5;color:#217449;margin:8px 0 0}
+.coupon-feedback.error{color:#b63e32}
+.coupon-remove{border:0;background:none;color:#835a22;font-size:11px;text-decoration:underline;padding:7px 0 0}
+.coupon-feedback[hidden],.coupon-remove[hidden],.cart-discount[hidden]{display:none}
+.cart-pricing{flex-shrink:0;padding:9px 23px 15px;border-top:1px solid var(--line);background:#fffbf4}
+.cart-pricing .cart-total{padding:4px 0 7px;border:0;font-size:12px;font-weight:600;color:#6f624f}
+.cart-discount{display:flex;justify-content:space-between;gap:8px;padding:4px 0 9px;color:#217449;font-size:12px}
+.cart-grand-total{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #ead9bb;padding-top:10px;font-size:14px;font-weight:800}
+@media(max-width:680px){.cart-content{min-height:0}.coupon-box{padding:13px 18px}.cart-pricing{padding:9px 18px 14px}}
 </style>
 </head>
 <body>
@@ -193,7 +214,16 @@ footer{background:#3d2812}.footer-brand{color:#e7b34c}.floating-wa{background:#1
 <aside class="cart-panel" id="cartPanel" inert role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
  <div class="cart-head"><h2 id="cartTitle">Your shopping bag</h2><button id="closeCart" aria-label="Close cart">×</button></div>
  <div class="cart-content" id="cartItems"><p style="color:#737b72">Your bag is empty. Add something from the collection.</p></div>
- <div class="cart-total"><span>Subtotal</span><span id="cartTotal">Rs. 0</span></div>
+ <div class="coupon-box">
+  <label for="couponCode">Coupon code <span>(optional)</span></label>
+  <div class="coupon-controls"><input type="text" id="couponCode" maxlength="40" placeholder="Enter coupon code" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="couponFeedback"><button type="button" id="applyCoupon">Apply</button></div>
+  <div class="coupon-meta"><p id="couponFeedback" class="coupon-feedback" role="status" aria-live="polite" hidden></p><button type="button" id="removeCoupon" class="coupon-remove" hidden>Remove coupon</button></div>
+ </div>
+ <div class="cart-pricing">
+  <div class="cart-total"><span>Subtotal</span><span id="cartTotal">Rs. 0</span></div>
+  <div class="cart-discount" id="cartDiscountRow" hidden><span id="discountLabel">Coupon discount</span><strong id="cartDiscount">-Rs. 0</strong></div>
+  <div class="cart-grand-total"><span>Total before delivery</span><strong id="cartGrandTotal">Rs. 0</strong></div>
+ </div>
  <form class="checkout" id="checkoutForm"><h3>Order details</h3>
   <div class="twocol"><div><label for="custName">Full name *</label><input id="custName" name="name" required autocomplete="name" maxlength="90"></div><div><label for="custPhone">Phone *</label><input id="custPhone" name="phone" required inputmode="tel" autocomplete="tel" placeholder="03xxxxxxxxx" maxlength="20"></div></div>
   <div class="twocol"><div><label for="custCity">City *</label><input id="custCity" name="city" required autocomplete="address-level2" maxlength="70"></div><div><label for="payMethod">Payment preference</label><select id="payMethod"><option value="Cash on delivery (subject to confirmation)">Cash on delivery</option><option value="Advance bank transfer (details on confirmation)">Bank transfer</option></select></div></div>
@@ -215,7 +245,9 @@ var products=[
  {id:"mulathi",name:"Flora Mulathi Serum",category:"skin",size:"Ask for size",price:800,old:1500,badge:"Serum Care",kind:"serum",description:"Flora Mulathi beauty serum. Contact our team for current pack size, ingredients and price."},
  {id:"protein",name:"Flora Protein Powder",category:"wellness",size:"Ask for pack size",price:2500,old:4500,badge:"Nutrition",kind:"pouch",description:"Dry-fruit and herbal protein powder range. Confirm the current formulation, allergen details and price before purchasing."},
 ];
-var state={filter:"all",q:"",cart:{}};
+// Add future coupons here: each code has its own discount percentage.
+var COUPONS=Object.freeze({"ANOSHY33":{percent:4}});
+var state={filter:"all",q:"",cart:{},coupon:null};
 try{var saved=JSON.parse(localStorage.getItem("flora_cart_v1")||"{}");if(saved&&typeof saved==="object") Object.keys(saved).forEach(function(k){if(products.some(function(p){return p.id===k&&p.price!==null})&&Number.isInteger(saved[k])&&saved[k]>0&&saved[k]<=99)state.cart[k]=saved[k];});}catch(e){}
 var $=function(id){return document.getElementById(id)};
 var money=function(n){return "Rs. "+Number(n).toLocaleString("en-PK")};
@@ -255,11 +287,37 @@ function card(p){
 }
 function render(){var grid=$("productGrid");grid.innerHTML="";var shown=products.filter(function(p){return (state.filter==="all"||p.category===state.filter)&&(p.name+" "+p.description+" "+p.size).toLowerCase().includes(state.q.toLowerCase())});shown.forEach(function(p){grid.appendChild(card(p))});$("emptyResults").hidden=shown.length>0;}
 function total(){return products.reduce(function(sum,p){return sum+(p.price||0)*(state.cart[p.id]||0)},0)}
+function cartTotals(){
+ var subtotal=total(),promo=state.coupon?COUPONS[state.coupon]:null;
+ var discount=promo?Math.round(subtotal*promo.percent/100):0;
+ return {subtotal:subtotal,discount:discount,final:subtotal-discount};
+}
+function couponFeedback(message,error){
+ var el=$("couponFeedback");
+ el.textContent=message;el.classList.toggle("error",!!error);el.hidden=!message;
+}
+function applyCoupon(){
+ var code=$("couponCode").value.trim().toUpperCase();
+ if(!code){state.coupon=null;renderCart();couponFeedback("Please enter a coupon code or leave this field blank.",true);return}
+ if(!Object.prototype.hasOwnProperty.call(COUPONS,code)){
+  state.coupon=null;renderCart();couponFeedback("Invalid coupon code. Please check and try again.",true);return;
+ }
+ state.coupon=code;$("couponCode").value=code;renderCart();
+ couponFeedback(code+" applied — "+COUPONS[code].percent+"% discount.",false);
+}
 function count(){return Object.values(state.cart).reduce(function(a,b){return a+b},0)}
 function add(id){state.cart[id]=Math.min(99,(state.cart[id]||0)+1);save();renderCart();toast("Added to shopping bag");}
 function changeQty(id,by){var n=(state.cart[id]||0)+by;if(n<=0)delete state.cart[id];else state.cart[id]=Math.min(99,n);save();renderCart()}
 function renderCart(){
- $("cartCount").textContent=count();$("cartTotal").textContent=money(total());$("checkoutButton").disabled=count()===0;
+ var amounts=cartTotals(),promo=state.coupon?COUPONS[state.coupon]:null;
+ $("cartCount").textContent=count();
+ $("cartTotal").textContent=money(amounts.subtotal);
+ $("cartDiscountRow").hidden=!promo||count()===0;
+ $("discountLabel").textContent=promo?"Coupon "+state.coupon+" ("+promo.percent+"% off)":"Coupon discount";
+ $("cartDiscount").textContent="-"+money(amounts.discount);
+ $("cartGrandTotal").textContent=money(amounts.final);
+ $("removeCoupon").hidden=!promo;
+ $("checkoutButton").disabled=count()===0;
  var root=$("cartItems");root.innerHTML="";
  if(!count()){var empty=document.createElement("p");empty.textContent="Your bag is empty. Add something from the collection.";empty.style.color="#737b72";root.append(empty);return}
  products.filter(function(p){return state.cart[p.id]}).forEach(function(p){
@@ -275,6 +333,15 @@ function renderCart(){
 }
 var previousFocus=null;
 function toggleCart(open){var panel=$("cartPanel"),overlay=$("cartOverlay");panel.inert=!open;panel.classList.toggle("open",open);overlay.classList.toggle("open",open);panel.setAttribute("aria-hidden",open?"false":"true");document.body.style.overflow=open?"hidden":"";if(open){previousFocus=document.activeElement;$("closeCart").focus()}else if(previousFocus&&previousFocus.focus)previousFocus.focus()}
+$("applyCoupon").addEventListener("click",applyCoupon);
+$("couponCode").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();applyCoupon()}});
+$("couponCode").addEventListener("input",function(){
+ if(state.coupon&&this.value.trim().toUpperCase()!==state.coupon){state.coupon=null;renderCart()}
+ couponFeedback("",false);
+});
+$("removeCoupon").addEventListener("click",function(){
+ state.coupon=null;$("couponCode").value="";renderCart();couponFeedback("Coupon removed.",false);
+});
 $("cartButton").addEventListener("click",function(){toggleCart(true)});
 $("closeCart").addEventListener("click",function(){toggleCart(false)});
 $("cartOverlay").addEventListener("click",function(){toggleCart(false)});
@@ -289,7 +356,9 @@ $("checkoutForm").addEventListener("submit",function(e){
  var name=$("custName").value.trim(),phone=$("custPhone").value.trim(),city=$("custCity").value.trim(),address=$("custAddress").value.trim(),note=$("custNote").value.trim();
  if(!name||!city||!address||!/^(\+?92|0)?[\s-]*3[\d\s-]{9,12}$/.test(phone))return toast("Enter your name, valid Pakistani phone, city and address");
  var lines=products.filter(function(p){return state.cart[p.id]}).map(function(p){return "• "+p.name+" x"+state.cart[p.id]+" = "+money(p.price*state.cart[p.id])});
- var message="Assalamualaikum! New Flora By M/S & CO. order request\n\n"+lines.join("\n")+"\n\nSubtotal: "+money(total())+"\nDelivery charges: To be confirmed\n\nName: "+name+"\nPhone: "+phone+"\nCity: "+city+"\nAddress: "+address+"\nPayment preference: "+$("payMethod").value+(note?"\nNote: "+note:"")+"\n\nPlease confirm stock, final total and delivery before processing.";
+ var amounts=cartTotals();
+ var couponLine=state.coupon?"\nCoupon code: "+state.coupon+" ("+COUPONS[state.coupon].percent+"% off)\nCoupon discount: -"+money(amounts.discount):"";
+ var message="Assalamualaikum! New Flora By M/S & CO. order request\n\n"+lines.join("\n")+"\n\nSubtotal: "+money(amounts.subtotal)+couponLine+"\nTotal before delivery: "+money(amounts.final)+"\nDelivery charges: To be confirmed\n\nName: "+name+"\nPhone: "+phone+"\nCity: "+city+"\nAddress: "+address+"\nPayment preference: "+$("payMethod").value+(note?"\nNote: "+note:"")+"\n\nPlease verify any coupon, stock, final total and delivery before processing.";
  var link=wa(message);var w=window.open(link,"_blank","noopener,noreferrer");if(!w)window.location.href=link;
 });
 $("copyrightYear").textContent=new Date().getFullYear();
